@@ -51,7 +51,7 @@
 				it("should add the object it's given to the models property", function(){
 					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-          students.add('Herman', '7')
+          students.add({name:'Herman', id: '7'});
 
           expect(fallStudents[2]).to.deep.equal({name: 'Herman', id: '7'});
 				});
@@ -59,30 +59,48 @@
         it("should increase the models property's length by 1", function(){
 					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-          students.add('Marylin', '8');
+          students.add({name: 'Marylin', id: '8'});
 
           expect(fallStudents.length).to.equal(3);
         });
 
-        it("should not  accept an empty object as an argument", function(){
+				it("should throw an error when given an empty object", function(){
+          var students = new Collection();
+          expect(function(){students.add({})}).to.throw(Error);
+				});        
+
+        it("should not accept an empty object as an argument", function(){
 					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-       		expect(students.add()).to.throw(Error);
+       		expect(function(){students.add({})}).to.throw(Error);
         });
 
         it("should throw an error when given an object without and id property", function(){
 					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-       		expect(students.add({name: 'Lily'})).to.throw(Error);
+       		expect(function(){students.add({name: 'Lily'})}).to.throw(Error);
         });
-
       });
 
+// You Are Here
+// VVVVVVVVVVVVVVVVVVVVVVVV
       describe("has a .remove method", function(){
 				it("should, when given an id, remove the corresponding object from the models property")
         it("should decrease the models property's length by 1");
         it("should only accept a single string as an id argument");
         it("should return true on successful removal");
+      });
+
+      describe("has an .empty() method", function(){
+        it('should clear out the models array');
+      });
+ 
+      describe("has an .random() method", function(){
+        it('should return a random object from the models array');
+      });
+ 
+      describe("has a .length() method", function(){
+        it('should return the length models array');
       });
     });
 })();

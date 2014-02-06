@@ -21,14 +21,21 @@ function Collection (models) {
 		}
 	}
 
-	this.add = function(name, id) {
+	this.add = function(newStudent) {
 
-		// if (typeof(name) != 'string' || typeof(id) != 'string') {
-			if (name == null || id == null) {
-			throw new Error ("It seems you're missing something.");
+		if (_.isEmpty(newStudent)) {
+			throw new Error ("Empty object is not a valid argument.");
 		}
 
-		this.models.push({name: name, id: id})
+		if (_.isUndefined(newStudent)) {
+			throw new Error ("It seems you're missing something.");	
+		}
+
+		if(!newStudent.hasOwnProperty('id')) {
+			throw new Error ("It seems you're missing an id property.");				
+		}
+
+		this.models.push(newStudent)
 	}
 }
 
