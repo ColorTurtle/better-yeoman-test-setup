@@ -1,0 +1,1 @@
+function Collection(a){this.models=a||[],this.find=function(a){var b;if("string"!=typeof a)throw new Error("Whoops!");return this.models.forEach(function(c){c.id==a&&(b=c)}),b?b:void 0},this.add=function(a,b){if(null==a||null==b)throw new Error("It seems you're missing something.");this.models.push({name:a,id:b})}}console.log("'Allo 'Allo!");
