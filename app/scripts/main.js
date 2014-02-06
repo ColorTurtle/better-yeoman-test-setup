@@ -21,9 +21,13 @@ function Collection (models) {
 		}
 	}
 
-	this.add = function(name, id){
+	this.add = function(name, id) {
 
-		if (typeof(name) != 'string' || typeof(id) != 'string')
+		// if (typeof(name) != 'string' || typeof(id) != 'string') {
+			if (name == null || id == null) {
+			throw new Error ("It seems you're missing something.");
+		}
+
 		this.models.push({name: name, id: id})
 	}
 }

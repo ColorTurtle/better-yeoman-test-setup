@@ -65,10 +65,15 @@
         });
 
         it("should not  accept an empty object as an argument", function(){
-        		expect(students.add({})).to.throw(Error);
+					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+       		expect(students.add()).to.throw(Error);
         });
+
         it("should throw an error when given an object without and id property", function(){
-        		expect(students.add({name: 'Lily'})).to.throw(Error);
+					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+       		expect(students.add({name: 'Lily'})).to.throw(Error);
         });
 
       });
