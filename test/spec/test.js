@@ -82,13 +82,35 @@
         });
       });
 
+      describe("has a .remove method", function(){
+        it("should, when given an id, remove the corresponding object from the models property", function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+          students.remove('6');
+          expect(students.models[1]).to.be(undefined);
+        });
+
+        it("should decrease the models property's length by 1", function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+          students.remove('6');
+          expect(fallStudents.length).to.equal(1);
+        }); 
+        
+        it("should only accept a single string as an id argument", function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+          students.remove('6');
+          expect(function(){students.remove('5', '6')}).to.be(undefined);
+        });
+
 // You Are Here
 // VVVVVVVVVVVVVVVVVVVVVVVV
-      describe("has a .remove method", function(){
-				it("should, when given an id, remove the corresponding object from the models property")
-        it("should decrease the models property's length by 1");
-        it("should only accept a single string as an id argument");
-        it("should return true on successful removal");
+        it("should return true on successful removal", function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+          
+        });
       });
 
       describe("has an .empty() method", function(){
