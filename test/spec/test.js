@@ -145,10 +145,33 @@
       });
  
       describe("has an .random() method", function(){
-        it('should return a random object from the models array');
-        it('should return an error if given an argument');
-        it('should not mutate the array');
-        it('should return the number of random items requested');
+        it('should return a random object from the models array', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          var randomSample = students.random();
+          expect(students.models).to.contain(randomSample)
+        });
+
+        it('should return an error if given a string as an argument', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          var randomSample = students.random();
+          expect(function(){students.random(one)}).to.equal(undefined);
+        });
+
+        it('should not mutate the array', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          students.random();
+          expect(students.models.length).to.equal(4)
+        });
+
+        it('should return the number of random items requested', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          var randomSample = students.random(2)
+          expect(randomSample.length).to.equal(2);
+        });
       });
  
       describe("has a .length() method", function(){
