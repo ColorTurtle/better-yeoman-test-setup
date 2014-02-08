@@ -133,8 +133,6 @@
           expect(_.findWhere(students.models, {name: 'Eddie'})).to.equal(undefined);
         });
 
-// You Are Here
-// VVVVVVVVVVVVVVVVVVVVVVVV
         it('should return confirmation message when successful', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
@@ -181,6 +179,8 @@
       });
  
       describe("has a .length() method", function(){
+// You Are Here
+// VVVVVVVVVVVVVVVVVVVVVVVV
         it('should return the length models array', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
           var students = new Collection(fallStudents);
@@ -193,9 +193,20 @@
           expect(students.length(0)).to.throw(Error);
         });
         
-        it('should not mutate the array');
+        it('should not mutate the array', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          var testBatch = new Array;
+          testBatch.push(fallStudents)
+          students.length
+          expect(students).to.equal(testBatch);
+        });
         
-        it('should return a number');
+        it('should return a number', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          expect(typeof(students.length())).to.equal('number');
+        });
       });
     });
 })();
