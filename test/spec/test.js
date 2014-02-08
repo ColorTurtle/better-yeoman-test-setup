@@ -111,9 +111,7 @@
           expect(students.remove('5')).to.equal(true);
         });
       });
-
-// You Are Here
-// VVVVVVVVVVVVVVVVVVVVVVVV
+// UNFINISHED
       describe("has an .empty() method", function(){
         it('should clear out the models array', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
@@ -144,19 +142,28 @@
         });
       });
  
+// You Are Here
+// VVVVVVVVVVVVVVVVVVVVVVVV
       describe("has an .random() method", function(){
         it('should return a random object from the models array', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
           var students = new Collection(fallStudents);
           var randomSample = students.random();
-          expect(students.models).to.contain(randomSample)
+          var itsThere = true;
+          _.each(randomSample, function(eachObject) {
+            if (!_.contains(students.models, eachObject))
+            {
+              itsThere = false;
+            };
+          })
+          expect(itsThere).to.equal(true)
         });
 
         it('should return an error if given a string as an argument', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
           var students = new Collection(fallStudents);
           var randomSample = students.random();
-          expect(function(){students.random(one)}).to.equal(undefined);
+          expect(function(){students.random('one')}).to.throw(Error);
         });
 
         it('should not mutate the array', function(){

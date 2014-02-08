@@ -62,6 +62,17 @@ function Collection (models) {
 
 		return true
 	}
-	
+
+	this.random = function(howMany) {
+		var howMany = howMany || 1;
+
+		if (typeof(howMany) != 'number') {
+			throw new Error("Sorry, you can only put in a number value.")
+		};
+
+		return _.sample(this.models, howMany);
+
+	}
+
 }
 	
