@@ -83,33 +83,34 @@
       });
 
       describe("has a .remove method", function(){
-// You Are Here
-// VVVVVVVVVVVVVVVVVVVVVVVV
         it("should, when given an id, remove the corresponding object from the models property", function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
           students.remove('6');
-          expect(students.models[1]).to.be(undefined);
+          expect(students.models[1]).to.be.equal(undefined);
         });
 
         it("should decrease the models property's length by 1", function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
           students.remove('6');
-          expect(fallStudents.length).to.equal(1);
+          expect(students.models.length).to.equal(1);
         }); 
         
+// You Are Here
+// VVVVVVVVVVVVVVVVVVVVVVVV
         it("should only accept a single string as an id argument", function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-          students.remove('6');
-          expect(function(){students.remove('5', '6')}).to.be(undefined);
+          students.remove('5','6');
+          expect(function(){students.remove(6)}).to.throw(Error);
+          expect(students.models.length).to.equal(1);
         });
 
         it("should return true on successful removal", function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-          expect(function(){students.remove('5')}).to.be(true);
+          expect(students.remove('5')).to.equal(true);
         });
       });
 
