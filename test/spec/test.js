@@ -97,8 +97,6 @@
           expect(students.models.length).to.equal(1);
         }); 
         
-// You Are Here
-// VVVVVVVVVVVVVVVVVVVVVVVV
         it("should only accept a single string as an id argument", function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
@@ -114,16 +112,50 @@
         });
       });
 
+// You Are Here
+// VVVVVVVVVVVVVVVVVVVVVVVV
       describe("has an .empty() method", function(){
-        it('should clear out the models array');
+        it('should clear out the models array', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+          students.empty();
+          expect(function(){_.isEmpty(students)}).to.equal(true);
+        });
+
+        it('should decrease the array length to 0', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+          students.empty();
+          expect(students.models.length).to.equal(0);
+        });
+
+        it('should return undefined on searches for array items', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+          students.empty();
+          expect(function(){_.findWhere(students, {name: 'Eddie'})}).to.equal(0);
+        });
+
+        it('should return confirmation message when successful', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var students = new Collection(fallStudents);
+          students.empty();
+          expect(function(){students.find([])}).to.return(string);
+        });
       });
  
       describe("has an .random() method", function(){
         it('should return a random object from the models array');
+        it('should return an error if given an argument');
+        it('should not mutate the array');
+        it('should return the number of random items requested');
       });
  
       describe("has a .length() method", function(){
         it('should return the length models array');
+        it('should throw an errro when provided an argument');
+        it('should not mutate the array');
+        it('should return a number');
       });
     });
 })();
