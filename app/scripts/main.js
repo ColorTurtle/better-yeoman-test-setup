@@ -63,6 +63,12 @@ function Collection (models) {
 		return true
 	}
 
+	this.empty = function(listVictim) {
+		listVictim = [];
+		this.models = listVictim;
+		return 'I hope you meant to do that because it\'s gone for good.'
+	}
+
 	this.random = function(howMany) {
 		var howMany = howMany || 1;
 

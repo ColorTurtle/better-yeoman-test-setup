@@ -111,13 +111,12 @@
           expect(students.remove('5')).to.equal(true);
         });
       });
-// UNFINISHED
       describe("has an .empty() method", function(){
         it('should clear out the models array', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-          students.empty();
-          expect(function(){_.isEmpty(students)}).to.equal(true);
+          students.empty(students.models);
+          expect(_.isEmpty(students.models)).to.equal(true);
         });
 
         it('should decrease the array length to 0', function(){
@@ -131,19 +130,18 @@
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
           students.empty();
-          expect(function(){_.findWhere(students, {name: 'Eddie'})}).to.equal(0);
+          expect(_.findWhere(students.models, {name: 'Eddie'})).to.equal(undefined);
         });
 
+// You Are Here
+// VVVVVVVVVVVVVVVVVVVVVVVV
         it('should return confirmation message when successful', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-          students.empty();
-          expect(function(){students.find([])}).to.return(string);
+          expect(typeof(students.empty())).to.equal('string');
         });
       });
  
-// You Are Here
-// VVVVVVVVVVVVVVVVVVVVVVVV
       describe("has an .random() method", function(){
         it('should return a random object from the models array', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
@@ -156,7 +154,8 @@
               itsThere = false;
             };
           })
-          expect(itsThere).to.equal(true)
+          expect(itsThere).to.equal(true);
+          // expect(students.models).to.include(students.random());
         });
 
         it('should return an error if given a string as an argument', function(){
@@ -182,9 +181,20 @@
       });
  
       describe("has a .length() method", function(){
-        it('should return the length models array');
-        it('should throw an errro when provided an argument');
+        it('should return the length models array', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          expect(students.length).to.equal(students.models.length)
+        });
+
+        it('should throw an error when provided an argument', function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          expect(students.length(0)).to.throw(Error);
+        });
+        
         it('should not mutate the array');
+        
         it('should return a number');
       });
     });
