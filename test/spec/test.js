@@ -179,27 +179,27 @@
       });
  
       describe("has a .length() method", function(){
-// You Are Here
-// VVVVVVVVVVVVVVVVVVVVVVVV
         it('should return the length models array', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
           var students = new Collection(fallStudents);
-          expect(students.length).to.equal(students.models.length)
+          expect(students.length()).to.equal(students.models.length)
         });
 
         it('should throw an error when provided an argument', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
           var students = new Collection(fallStudents);
-          expect(students.length(0)).to.throw(Error);
+          // expect(students.length(1)).to.throw(Error);
+          expect(function(){students.length(1)}).to.throw(Error);
         });
         
+// You Are Here
+// VVVVVVVVVVVVVVVVVVVVVVVV
         it('should not mutate the array', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
           var students = new Collection(fallStudents);
-          var testBatch = new Array;
-          testBatch.push(fallStudents)
+          var testBatch = new Collection(fallStudents);
           students.length
-          expect(students).to.equal(testBatch);
+          expect(students.models).to.equal(testBatch.models);
         });
         
         it('should return a number', function(){

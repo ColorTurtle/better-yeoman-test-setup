@@ -19,7 +19,7 @@ function Collection (models) {
 		if (result) {
 			return result;
 		}
-	}
+	};
 
 	this.add = function(newStudent) {
 
@@ -36,7 +36,7 @@ function Collection (models) {
 		}
 
 		this.models.push(newStudent)
-	}
+	};
 
 	this.remove = function(idRemove) {
 		var lengthTest = [idRemove];
@@ -61,13 +61,13 @@ function Collection (models) {
 		});
 
 		return true
-	}
+	};
 
 	this.empty = function(listVictim) {
 		listVictim = [];
 		this.models = listVictim;
 		return 'I hope you meant to do that because it\'s gone for good.'
-	}
+	};
 
 	this.random = function(howMany) {
 		var howMany = howMany || 1;
@@ -78,7 +78,17 @@ function Collection (models) {
 
 		return _.sample(this.models, howMany);
 
-	}
+	};
+
+	this.length = function(arg) {
+		var testArray;
+
+		if (arguments.length > 0) {
+			throw	new Error("Whoa there buddy. You can't put arguments into the \'.length\' method.")
+		}
+
+		return this.models.length;
+	};
 
 }
 	
