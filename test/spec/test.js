@@ -21,7 +21,8 @@
  
         });
     });
-// Write more tests below... 
+// You Are Here
+// VVVVVVVVVVVVVVVVVVVVVVVV
     describe('A Collection instance', function () {
       describe('has a .find() menthod', function () {
         it('should return an object when given an id that is present in the models', function(){
@@ -45,40 +46,73 @@
           expect(function(){students.find({})}).to.throw(Error);
           expect(function(){students.find([])}).to.throw(Error);
         });      
+
+        it("should not mutate the original array", function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          var studentsBackup = new Collection(fallStudents);
+          students.find('5');
+          expect(students.models).to.equal(studentsBackup.models);
+        });
+
+        it("should return a message if more than one object has the same id", function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'5'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          var studentsBackup = new Collection(fallStudents);
+
+          expect(typeof(students.find('5'))).to.equal('string')
+        });
+
+        it("should return a length of one", function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          var studentFive = students.find('5');
+          var atRiskStudents = new Array (atRiskStudents);
+          expect(atRiskStudents.length).to.equal(1);
+
+        });
+
+        it("should not change the length of the array", function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
+          var students = new Collection(fallStudents);
+          var studentsBackup = new Collection(fallStudents);
+          students.find('5');
+          expect(students.models.length).to.equal(studentsBackup.models.length)
+        });        
       }); 
             // .add Method
       describe("has an .add method", function(){
-				it("should add the object it's given to the models property", function(){
-					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+        it("should add the object it's given to the models property", function(){
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
           students.add({name:'Herman', id: '7'});
 
           expect(fallStudents[2]).to.deep.equal({name: 'Herman', id: '7'});
-				});
+        });
 
         it("should increase the models property's length by 1", function(){
-					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
           students.add({name: 'Marylin', id: '8'});
 
           expect(fallStudents.length).to.equal(3);
         });
 
-				it("should throw an error when given an empty object", function(){
+        it("should throw an error when given an empty object", function(){
           var students = new Collection();
           expect(function(){students.add({})}).to.throw(Error);
-				});        
+        });        
 
         it("should not accept an empty object as an argument", function(){
-					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-       		expect(function(){students.add({})}).to.throw(Error);
+          expect(function(){students.add({})}).to.throw(Error);
         });
 
         it("should throw an error when given an object without and id property", function(){
-					var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
+          var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}];
           var students = new Collection(fallStudents);
-       		expect(function(){students.add({name: 'Lily'})}).to.throw(Error);
+          expect(function(){students.add({name: 'Lily'})}).to.throw(Error);
         });
       });
 
@@ -140,7 +174,7 @@
         });
       });
  
-      describe("has an .random() method", function(){
+      describe("has a .random() method", function(){
         it('should return a random object from the models array', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
           var students = new Collection(fallStudents);
@@ -192,8 +226,6 @@
           expect(function(){students.length(1)}).to.throw(Error);
         });
         
-// You Are Here
-// VVVVVVVVVVVVVVVVVVVVVVVV
         it('should not mutate the array', function(){
           var fallStudents = [{name: 'Eddie', id: '5'},{name: 'Grandpa', id:'6'}, {name: 'Marylin', id:'7'}, {name: 'Herman', id: '8'}];
           var students = new Collection(fallStudents);

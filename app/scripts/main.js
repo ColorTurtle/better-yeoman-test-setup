@@ -7,8 +7,18 @@ function Collection (models) {
 		var result;
 
 		if (typeof(id) != 'string') {
-			throw new Error("Whoops!");
-		}
+			throw new Error("Whoops! You need to have the number value surrounded by quotation marks. ");
+		};
+
+		var argArray = _.where(this.models, {id: id});
+
+		if (argArray.length >1) {
+			return "It seems there is an error in the database. More than one item was found."
+		};
+
+		if (argArray.length >1) {
+			return findResult;
+		};
 
 		this.models.forEach(function(value, index){
 			if (value.id == id) {
@@ -19,6 +29,7 @@ function Collection (models) {
 		if (result) {
 			return result;
 		}
+
 	};
 
 	this.add = function(newStudent) {
